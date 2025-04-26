@@ -47,6 +47,11 @@ function removeActivity(index) {
 </template>
 
 <style scoped>
+.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
