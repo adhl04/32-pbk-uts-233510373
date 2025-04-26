@@ -16,6 +16,10 @@ const filteredActivities = computed(() => {
     ? activities.value.filter(activity => !activity.done)
     : activities.value
 })
+
+function removeActivity(index) {
+  activities.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -29,6 +33,9 @@ const filteredActivities = computed(() => {
     <ul class="activity-list">
       <li v-for="(activity, index) in filteredActivities" :key="index" class="activity-item">
         <span :class="{ done: activity.done }">{{ activity.text }}</span>
+        <div class="actions">
+          <button @click="removeActivity(index)" class="button-small danger">✖</button>
+        </div>
       </li>
     </ul>
   </div>
