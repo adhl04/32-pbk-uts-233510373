@@ -1,17 +1,24 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, computed } from 'vue'
+const activities = ref([])
+const newActivity = ref('')
+
+function addActivity() {
+  if (newActivity.value.trim()) {
+    activities.value.push({ text: newActivity.value, done: false })
+    newActivity.value = ''
+  }
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="app-container">
+    <h1 class="title">Daftar Kegiatan</h1>
+    <form @submit.prevent="addActivity" class="form">
+      <input v-model="newActivity" placeholder="Tambahkan kegiatan baru..." class="input" />
+      <button type="submit" class="button">Tambah</button>
+    </form>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
