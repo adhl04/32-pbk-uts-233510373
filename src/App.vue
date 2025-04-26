@@ -44,6 +44,13 @@ function removeActivity(index) {
       </li>
     </ul>
   </div>
+
+  <div class="filter">
+      <label>
+        <input type="checkbox" v-model="showOnlyPending" />
+        Tampilkan hanya yang belum selesai
+      </label>
+    </div>
 </template>
 
 <style scoped>
