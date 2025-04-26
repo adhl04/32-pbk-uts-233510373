@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 const activities = ref([])
 const newActivity = ref('')
+const showOnlyPending = ref(false)
 
 function addActivity() {
   if (newActivity.value.trim()) {
@@ -9,6 +10,12 @@ function addActivity() {
     newActivity.value = ''
   }
 }
+
+const filteredActivities = computed(() => {
+  return showOnlyPending.value
+    ? activities.value.filter(activity => !activity.done)
+    : activities.value
+})
 </script>
 
 <template>
@@ -18,6 +25,12 @@ function addActivity() {
       <input v-model="newActivity" placeholder="Tambahkan kegiatan baru..." class="input" />
       <button type="submit" class="button">Tambah</button>
     </form>
+
+    <ul class="activity-list">
+      <li v-for="(activity, index) in filteredActivities" :key="index" class="activity-item">
+        <span :class="{ done: activity.done }">{{ activity.text }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
